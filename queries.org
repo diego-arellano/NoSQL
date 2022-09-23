@@ -42,5 +42,22 @@ db.restaurants.find({"grades.score": {$gt: 90}}, {"grades.score":1})
 
 Escribe una función find() para encontrar los restaurantes que obtuvieron una puntuación, más de 80 pero menos de 100.
 #+begin_src js
-db.restaurants.find({"grades.score": {$gt: 80, $lt: 100}}, {"grades.score":1})
+db.restaurants.find({"grades": {$elemMatch: {"score":{$gt: 80, $lt: 100}}}}, {"grades.score":1})     
 #+end_src
+
+Escribe una función find() para encontrar los restaurantes que se ubican en un valor de latitud menor que -95.754168.
+#+begin_src js
+db.restaurants.find({"address.coord.0": {$lt: -95.754168}}, {"address.coord":1})
+#+end_src
+
+Escribe una función find() para encontrar los restaurantes que no preparan ningún tipo de cocina de ‘estadounidense’ y su puntuación de calificación es superior a 70 y latitud inferior a -65.754168.
+#+begin_src js
+db.restaurants.find({"cuisine":{$ne: "American "}, "address.coord.0":{$lt: -65.754168}, "grades.score": {$gt: 70}},{"cuisine":1,"grades":1, "address.coord":1})
+#+end_src
+
+Escribe una función find() para encontrar los restaurantes que no preparan ninguna cocina del continente americano y obtuvieron una calificación de ‘A’ que no pertenece al distrito de Brooklyn. El documento debe mostrarse según la cocina en orden descendente.
+#+begin_src js
+db.restaurants.find({"cuisine":{$nin:["American ", "Peruvian", "Mexican", "Brazilian", "Latin (Cuban, Dominican, Puerto Rican, South & Central American)"]}, "address.coord.0":{$lt: -65.754168},"grades.score": {$gt: 70}},{"cuisine":1})
+#+end_src
+
+
