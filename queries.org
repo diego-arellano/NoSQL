@@ -1,26 +1,46 @@
-#Queries 
++ Queries 
 
-####Escribe una función find() para mostrar todos los documentos de la colección de restaurantes.
+Escribe una función find() para mostrar todos los documentos de la colección de restaurantes.
 #+begin_src js
 db.restaurants.find()
 #+end_src
 
-####Escribe una función find() para mostrar los campos restaurant_id, nombre, municipio y cocina para todos los documentos en el restaurante de la colección.
+Escribe una función find() para mostrar los campos restaurant_id, nombre, municipio y cocina para todos los documentos en el restaurante de la colección.
 #+begin_src js
 db.restaurants.find({},{"restaurant_id":1,"name":1, "borough":1, "cuisine":1})
 #+end_src
 
-####Escribe una función find() para mostrar los campos restaurant_id, nombre, municipio y cocina, pero excluya el campo \_id para todos los documentos de la colección restaurant.
+Escribe una función find() para mostrar los campos restaurant_id, nombre, municipio y cocina, pero excluya el campo \_id para todos los documentos de la colección restaurant.
 #+begin_src js
 db.restaurants.find({},{"restaurant_id":1,"name":1, "borough":1, "cuisine":1, "_id":0})
 #+end_src
 
-####Escribe una función find() para mostrar los campos restaurant_id, nombre, municipio y código postal, pero excluya el campo \_id para todos los documentos de la colección restaurant.
+Escribe una función find() para mostrar los campos restaurant_id, nombre, municipio y código postal, pero excluya el campo \_id para todos los documentos de la colección restaurant.
 #+begin_src js
 db.restaurants.find({},{"restaurant_id":1,"name":1, "borough":1, "address.zipcode":1, "_id":0})
 #+end_src
 
-####Escribe una función find() para mostrar todos los restaurantes que se encuentran en el distrito del Bronx.
+Escribe una función find() para mostrar todos los restaurantes que se encuentran en el distrito del Bronx.
 #+begin_src js
 db.restaurants.find({"borough":"Bronx"})
+#+end_src
+
+Escribe una función find() para mostrar los primeros 5 restaurantes que se encuentran en el condado del Bronx.
+#+begin_src js
+db.restaurants.find({"borough":"Bronx"}).limit(5)
+#+end_src
+
+Escribe una función find() para mostrar los siguientes 5 restaurantes después de omitir los primeros 5 que se encuentran en el condado del Bronx.
+#+begin_src js
+db.restaurants.find({"borough":"Bronx"}).skip(5).limit(5)
+#+end_src
+
+Escribe una función find() para encontrar los restaurantes que obtuvieron una puntuación de más de 90.
+#+begin_src js
+db.restaurants.find({"grades.score": {$gt: 90}}, {"grades.score":1})
+#+end_src
+
+Escribe una función find() para encontrar los restaurantes que obtuvieron una puntuación, más de 80 pero menos de 100.
+#+begin_src js
+db.restaurants.find({"grades.score": {$gt: 80, $lt: 100}}, {"grades.score":1})
 #+end_src
