@@ -100,3 +100,21 @@ db.restaurants.find( {$or:[ {"cuisine": {$nin:["American ", "Chinese"] } }, {"na
 {"name": 1, "borough": 1, "cuisine":1});
 #+end_src
 
+Escribe una función find() para encontrar el ID del restaurante, el nombre y las calificaciones de los restaurantes que obtuvieron una calificación de “A” y obtuvieron una puntuación de 11 en un ISODate “2014-08-11T00: 00: 00Z” entre muchas de las fechas de la encuesta.
+#+begin_src js
+db.restaurants.find( {"grades.grade":"A", "grades.score":11, "grades.date":ISODate("2014-08-11T00:00:00Z")}, 
+{"name": 1, "grades": 1});
+#+end_src
+
+Escribe una función find() para encontrar el ID del restaurante, el nombre y las calificaciones de aquellos restaurantes donde el segundo elemento de la matriz de calificaciones contiene una calificación de “A” y una puntuación de 9 en un ISODate “2014-08-11T00: 00: 00Z”.
+#+begin_src js
+db.restaurants.find( {"grades.1.grade":"A", "grades.1.score":9, "grades.1.date":ISODate("2014-08-11T00:00:00Z")}, 
+{"name": 1, "grades": 1});
+#+end_src
+
+Escribe una función find() para encontrar el ID del restaurante, el nombre, la dirección y la ubicación geográfica para aquellos restaurantes donde el segundo elemento de la matriz de coordenadas contiene un valor que sea más de 42 y hasta 52.
+#+begin_src js
+db.restaurants.find( {"address.coord.1": {$gt: 42, $lt: 52}}, {"name": 1, "address": 1}); 
+#+end_src
+
+Escribe una función find() para organizar el nombre de los restaurantes en orden ascendente junto con todas las columnas.
