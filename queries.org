@@ -118,3 +118,6 @@ db.restaurants.find( {"address.coord.1": {$gt: 42, $lt: 52}}, {"name": 1, "addre
 #+end_src
 
 Escribe una función find() para organizar el nombre de los restaurantes en orden ascendente junto con todas las columnas.
+#+begin_src js
+db.restaurants.aggregate([{$sort: {"name":1}},{$project: {"name":1}}])
+#+end_src
