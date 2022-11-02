@@ -1,5 +1,7 @@
 + Queries 
 
+++ Pt. 1
+
 Escribe una función find() para mostrar todos los documentos de la colección de restaurantes.
 #+begin_src js
 db.restaurants.find()
@@ -158,3 +160,5 @@ Escribe una función find() para encontrar el nombre del restaurante, el distrit
 #+begin_src js
 db.restaurants.find({"name":/^Mad/}, {"name":1, "borough":1, "cuisine":1,"address.coord":1})
 #+end_src
+
+++ Pt. 2 
