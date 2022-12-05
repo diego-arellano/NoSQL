@@ -1,26 +1,26 @@
 
-**¿Cuál es la orden más reciente por cliente?
+** ¿Cuál es la orden más reciente por cliente?
 #+begin_src cypher
 match (c:Customer) -[:PURCHASED]-> (o:Order) 
 return c.contactName as name, min(o.orderDate) as max_order_date
 order by name
 #+end_src
 
-**De nuestros clientes, ¿qué función desempeñan y cuántos son?
+** De nuestros clientes, ¿qué función desempeñan y cuántos son?
 #+begin_src cypher
 match (c:Customer)
 return c.contactTitle as title, count(c.contactTitle) as count_title 
 order by count_title
 #+end_src
 
-**¿Cuántos productos tenemos de cada categoría?
+** ¿Cuántos productos tenemos de cada categoría?
 #+begin_src cypher
 match (p:Product) --> (c:Category) 
 return c.categoryName as name, count(c.categoryName) as category_count
 order by category_count
 #+end_src
 
-**¿Cómo podemos generar el reporte de reorder?
+** ¿Cómo podemos generar el reporte de reorder?
 #+begin_src cypher
 match (p:Product) 
 where p.reorderLevel > p.unitsInStock 
