@@ -27,3 +27,15 @@ where p.reorderLevel > p.unitsInStock
 return p.productName as name, p.unitsInStock as units_in_stock, p.reorderLevel as reorder_level 
 order by units_in_stock, reorder_level desc
 #+end_src
+
+** ¿A donde va nuestro envío más voluminoso?
+#+begin_src cypher
+match (o:Order)
+return o.shipCountry as ship_country, max(toFloat(o.freight)) as max_freight 
+order by max_freight desc limit 1
+#+end_src
+
+** ¿Qué productos mandamos en navidad?
+#+begin_src cypher
+
+#+end_src
